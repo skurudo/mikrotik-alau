@@ -1,0 +1,27 @@
+#AddressList AutoUpdate
+#
+# Settings
+:local addrlistname "test"
+:local addrlisturl "https://raw.githubusercontent.com/skurudo/mikrotik-scripts/master/ALAU"
+:local addrlistfilename "test.rsc"
+#
+:log info "ALAU Script - started"     
+:tool fetch check-certificate=no url="$addrlisturl/$addrlistfilename"
+:delay 10
+:log info "ALAU Script - download finished"     
+# check file and run wild
+:if ([:len [/file find name=$addrlistfilename]] > 0)  do={
+      # if file exists, we clean old address-list
+               :do { :foreach i in [/ip firewall address-list find where list=$addrlistname] do={/ip firewall address-list remove $i}; } on-error={:log error "ALAU Script - Error, we can't clear list!"};	
+      :log info "ALAU Script - address-list deleted"     
+	  # import new address-list
+	  :import $addrlistfilename
+      :log info "ALAU Script - import finished"     
+	  # remove file
+	  :delay 5
+      :file remove $addrlistfilename
+	  :log info "ALAU Script - file removed"     
+	  :log info "ALAU Script - finished"     
+        } else={
+      :log info "ALAU Script - Sorry, we're failed"     
+        }		
