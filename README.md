@@ -1,5 +1,5 @@
 ## ALAU - AddressList Auto Update
-Script can update your addresslist from remote location (http/https)
+Script can update your addresslist from remote location (http/https).
 It can be list for ban, some favorite IPs or whitelist...
 
 Added v01 version:
