@@ -1,8 +1,67 @@
-## ALAU - AddressList Auto Update
-Script can update your addresslist from remote location (http/https).
-It can be list for ban, some favorite IPs or whitelist...
+# ALAU - AddressList Auto Update
 
-Added v01 version:
-* dynamic addresses may not supported correctly and may bring error;
-* rsc file format very important;
-* list in rsc file, it's pretty solid now, but you need check "format" ;-(
+## Описание проекта
+
+**ALAU** - это скрипт для автоматического обновления списков адресов (AddressList) в MikroTik RouterOS из удаленных источников по HTTP/HTTPS.
+
+## Возможности
+
+- Автоматическое обновление списков адресов из удаленных источников
+- Поддержка HTTP/HTTPS протоколов
+- Автоматическая очистка старых записей перед импортом новых
+- Логирование всех операций
+- Возможность использования для различных целей:
+  - Списки блокировки (blacklist)
+  - Списки разрешенных адресов (whitelist)
+  - Списки избранных IP-адресов
+  - Любые другие списки адресов
+
+## Структура проекта
+
+- `alau.script` - основной скрипт для RouterOS
+- `test.rsc` - пример файла со списком адресов
+- `README.md` - описание на русском языке
+- `README_EN.md` - описание на английском языке
+
+## Как использовать
+
+1. Загрузите скрипт `alau.script` в ваш MikroTik роутер
+2. Настройте параметры в скрипте:
+   - `addrlistname` - имя списка адресов
+   - `addrlisturl` - URL для загрузки файла
+   - `addrlistfilename` - имя файла для загрузки
+3. Запустите скрипт в RouterOS
+
+## Формат файла списка адресов
+
+Файл должен быть в формате `.rsc` (RouterOS Script) со следующей структурой:
+
+```
+/ip firewall address-list
+add address=IP_ADDRESS comment=COMMENT list=LIST_NAME
+```
+
+## Требования
+
+- MikroTik RouterOS
+- Доступ к интернету для загрузки файлов
+- Правильно отформатированный .rsc файл
+
+## Версии
+
+### v01
+- Базовая функциональность
+- Динамические адреса могут работать некорректно
+- Формат .rsc файла критически важен
+- Список адресов в .rsc файле стабилен, но требует проверки формата
+
+## Автор
+
+Проект создан для автоматизации управления списками адресов в MikroTik RouterOS.
+
+---
+
+## Документация на других языках
+
+- [English version](README_EN.md) - English documentation
+- [Русская версия](README.md) - Документация на русском языке
